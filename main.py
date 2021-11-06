@@ -3,7 +3,7 @@ from termcolor import colored
 
 PRODUCTS = []
 print("Loading...")
-myfile = open('/home/shahin/Desktop/sajjad/shahinStore/database.txt', 'r')
+myfile = open('/home/shahin/Desktop/sajjad/store/database.txt', 'r+')
 data = myfile.read().lower()
 products_list = data.split('\n')
 for i in range(len(products_list)):
@@ -47,6 +47,7 @@ def add_new_product():
 
 def edit_product():
     while True:
+        myfile = open('/home/shahin/Desktop/sajjad/store/database.txt', 'r+')
         Edit_product = input("Do you want to edit the product? if yes please input y else n: ")
         if (Edit_product == "y"):
             print("1- Edit Id product")
@@ -58,13 +59,13 @@ def edit_product():
             for i in range(len(PRODUCTS)):
                 if(PRODUCTS[i]["id"]) == Id_edit:
                     if (choice_a_number == "1"):
-                        PRODUCTS[i]["id"] == input() 
+                        PRODUCTS[i]["id"] == myfile.write(str(input("please input new ID as you want: "))) 
                     elif (choice_a_number == "2"):
-                        PRODUCTS[i]["name"] == input()
+                        PRODUCTS[i]["name"] == myfile.write(str(input("please input name of new product as you want: ")))
                     elif (choice_a_number == "3"):
-                        PRODUCTS[i]["price"] == input()
+                        PRODUCTS[i]["price"] == myfile.write(str(input("please input price of new product as you want: ")))
                     elif (choice_a_number == "4"):
-                        PRODUCTS[i]["count"] == input()
+                        PRODUCTS[i]["count"] == myfile.write(str(input("please input count of product as you want: ")))
                     else:
                         print("We don't have this product")
                         break
@@ -73,10 +74,36 @@ def edit_product():
         
 
 def delete_product():
-    pass
+    while True:
+        Delete_product = input("Do you want to remove the product? if yes please input y else n: ")
+        if (Delete_product == "y"):
+            Id_delete = input("Please Enter Product Id: ")
+            for i in range(len(PRODUCTS)):
+                if(PRODUCTS[i]["id"]) == Id_delete:
+                    PRODUCTS.remove(i)
+                    print("product removed")
+                else:
+                    print("We don't have this product")
+                    break
+        elif(Delete_product == "n"):
+            break
 
 def search_in_list():
-    pass
+    while True:
+        Search_product = input("Do you want to search for the product? if yes please input y else n: ")
+        if (Search_product == "y"):
+            search_name = input("What are you looking for? ")
+            for i in range(len(PRODUCTS)):
+                if(PRODUCTS[i]["name"] == search_name):
+                    print("product founded")
+                    for key, value in PRODUCTS.items(): 
+	                    print("Name: {}, Score: {}".format(key, value)) 
+                    break
+                else:
+                    print("Not match")
+        elif (Search_product == "n"):
+            break
+
 
 def buy_product():
     pass
