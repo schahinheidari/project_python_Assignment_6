@@ -89,6 +89,7 @@ def delete_product():
             break
 
 def search_in_list():
+    print(PRODUCTS)
     while True:
         Search_product = input("Do you want to search for the product? if yes please input y else n: ")
         if (Search_product == "y"):
@@ -96,11 +97,11 @@ def search_in_list():
             for i in range(len(PRODUCTS)):
                 if(PRODUCTS[i]["name"] == search_name):
                     print("product founded")
-                    for key, value in PRODUCTS.items(): 
+                    for key, value in PRODUCTS["name"]: 
 	                    print("Name: {}, Score: {}".format(key, value)) 
                     break
-                else:
-                    print("Not match")
+            else:
+                print("Not match")
         elif (Search_product == "n"):
             break
 
@@ -111,7 +112,7 @@ def exit():
     pass
 
 f = Figlet(font='standard')
-print (f.renderText('Shahin Store'))
+print (f.renderText('Store Market'))
 
 show_menu()
 choice = int(input("please choose a number: "))
