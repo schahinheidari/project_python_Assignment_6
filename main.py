@@ -104,8 +104,34 @@ def search_in_list():
             break
 
 def buy_product():
-    pass
+    sum = 0
+    count = 0
+    factor = []
+    while True:
+        Buy_product = input("Do you want to Buy the product? if yes please input y else n: ")
+        if Buy_product == "Y" or "y":
+            print(PRODUCTS)
+            Id_name = int(input("please input id of product: "))
+            for i in range(len(PRODUCTS)):
+                if (PRODUCTS[i]["id"] == Id_name):
+                    print("product exist. \n")
+                    count_buy = int(input("Please enter count of product: "))
+                    if count_buy > int(PRODUCTS[i]["count"]):
+                        print("Don't have this count of product")
+                    else:
+                        PRODUCTS[i]["count"] = str(int(PRODUCTS[i]["count"]) - count_buy)
+                        sum = sum + int(PRODUCTS[i]["price"] * count_buy)
+                        count = count + count_buy
 
+                        fact = {"price": PRODUCTS[i]["price"], "sum of price": str(sum), "counter": (count)}
+                        factor.append(fact)
+                        print(factor)
+                    break
+                else:
+                    print("product doesn't exist")
+        elif Buy_product == "N" or "n":
+            break
+            
 def exit():
     file = open('/home/shahin/Desktop/sajjad/store/database.txt', 'r+')
     for i in range(len(PRODUCTS)):
